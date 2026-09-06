@@ -1,0 +1,29 @@
+[Your Name]
+[Your Address]
+[City, State, ZIP]
+[Email Address]
+[Phone Number]
+
+[Date]
+
+To,
+[Manager's Name]
+[Designation]
+[Company Name]
+[Company Address]
+
+Subject: Leave Application
+
+Dear [Manager's Name],
+
+I am writing to formally request leave from [Start Date] to [End Date] due to [reason for leave]. I will ensure that all my pending work is completed and handed over to [Colleague's Name] before my departure so that there is no disruption to ongoing tasks.
+
+I will be available on email for any urgent matters during my absence and will resume work on [Return Date].
+
+I kindly request you to consider and approve my leave application. Thank you for your time and understanding.
+
+Yours sincerely,
+[Your Name]
+[Your Designation]
+[Department]
+[Employee ID, if applicable]
