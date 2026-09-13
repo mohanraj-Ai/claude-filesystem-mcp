@@ -6,21 +6,22 @@
 
 A practical **Model Context Protocol (MCP)** project that connects **Claude Desktop** to a local filesystem through an MCP server.
 
-This project demonstrates how an AI assistant can interact with local files and folders through **MCP tools**, enabling controlled filesystem operations through a standardized AI-to-tool communication layer.
+This project demonstrates how an AI assistant can interact with local files and folders through controlled **MCP tools**, enabling AI-to-tool communication through a standardized protocol.
 
 ---
 
 ## 🚀 Project Overview
 
-The **Local Filesystem MCP** project demonstrates how an AI assistant can interact with a local computer filesystem using the **Model Context Protocol**.
+The **Local Filesystem MCP** project demonstrates how an AI assistant can interact with a computer filesystem using the **Model Context Protocol**.
 
-Instead of allowing an AI application unrestricted access to the operating system, the MCP server exposes controlled tools that Claude can invoke when required.
+Instead of giving an AI application unrestricted access to the operating system, the MCP server exposes controlled filesystem capabilities that Claude can invoke when required.
 
-### Key capabilities
+### Key Capabilities
 
 * 📂 List files and directories
 * 📄 Read files
 * 📝 Create files
+* ✏️ Write and modify files
 * 🔧 Perform filesystem operations through MCP tools
 * 🤖 Connect Claude Desktop with external tools
 * 🔐 Restrict access to authorized directories
@@ -35,13 +36,13 @@ In this project, MCP acts as the communication layer between **Claude Desktop** 
 
 ```text
 Claude Desktop
-      │
-      │ MCP Protocol
-      ▼
+       │
+       │ MCP Protocol
+       ▼
 Filesystem MCP Server
-      │
-      │ File Operations
-      ▼
+       │
+       │ File Operations
+       ▼
 Authorized Local Filesystem
 ```
 
@@ -65,7 +66,7 @@ The communication layer used to send tool requests between Claude Desktop and th
 
 The server exposes filesystem capabilities as MCP tools and executes authorized operations.
 
-**Local Filesystem**
+**Authorized Local Filesystem**
 
 The files and directories that the MCP server is permitted to access.
 
@@ -110,12 +111,15 @@ Claude identifies that a filesystem operation is required, invokes the appropria
 
 ## 🛠️ Technologies Used
 
-* **Claude Desktop** — AI assistant and MCP client
-* **Model Context Protocol (MCP)** — AI-to-tool communication
-* **Filesystem MCP Server** — filesystem tool provider
-* **Python** — server/runtime environment
-* **JSON** — configuration
-* **Git & GitHub** — version control and project portfolio
+| Technology             | Purpose                           |
+| ---------------------- | --------------------------------- |
+| Claude Desktop         | AI assistant and MCP client       |
+| Model Context Protocol | AI-to-tool communication          |
+| Filesystem MCP Server  | Filesystem tool provider          |
+| Python                 | Server/runtime environment        |
+| JSON                   | MCP configuration                 |
+| Git                    | Version control                   |
+| GitHub                 | Source-code hosting and portfolio |
 
 ---
 
@@ -123,7 +127,7 @@ Claude identifies that a filesystem operation is required, invokes the appropria
 
 The MCP server exposes filesystem functionality through tools.
 
-Typical operations include:
+Typical filesystem operations may include:
 
 ```text
 List Directory
@@ -136,7 +140,7 @@ Search Files
 
 Claude can select an appropriate tool based on the user's request.
 
-The exact available tools depend on the filesystem MCP implementation and configuration.
+The exact tools available depend on the filesystem MCP implementation and configuration.
 
 ---
 
@@ -176,9 +180,9 @@ cd claude-filesystem-mcp
 
 ---
 
-### 3. Configure Claude Desktop
+### 3. Configure the MCP Server
 
-Configure the MCP server in the Claude Desktop MCP configuration.
+Configure the filesystem MCP server in the Claude Desktop MCP configuration.
 
 The configuration should specify:
 
@@ -225,7 +229,7 @@ Example request:
 Read the README.md file.
 ```
 
-Claude can call the appropriate filesystem tool and return the file contents.
+Claude can call the appropriate filesystem tool and return the requested file contents.
 
 ---
 
@@ -238,13 +242,13 @@ Create a file named notes.txt and write
 today's project notes into it.
 ```
 
-Claude can invoke the filesystem tool to create the file.
+Claude can invoke the filesystem tool to create the requested file.
 
 ---
 
 ## 📸 Real Project Screenshots
 
-The following screenshots demonstrate the **actual working implementation**.
+The following screenshots demonstrate the actual working implementation.
 
 ### 1. MCP Server Running
 
@@ -274,7 +278,7 @@ The requested file is successfully created through the MCP filesystem integratio
 
 Filesystem MCP integrations should use controlled directory access.
 
-### Recommended practices
+### Recommended Practices
 
 * ✅ Expose only required directories
 * ✅ Avoid exposing the entire system drive
@@ -288,6 +292,7 @@ For example:
 
 ```text
 ❌ C:\
+
 ❌ C:\Users\<username>\
 
 ✅ E:\AI-Projects\MCP\
@@ -317,13 +322,13 @@ This project demonstrates practical experience with:
 
 ## 💡 Why MCP Matters
 
-Traditional LLM applications primarily generate responses from the information available inside the conversation.
+Traditional LLM applications primarily generate responses from information available inside the conversation.
 
-MCP allows AI applications to interact with external systems through tools.
+MCP allows AI applications to interact with external systems through standardized tools.
+
+### Traditional LLM
 
 ```text
-Traditional LLM
-
 User
  ↓
 LLM
@@ -331,7 +336,7 @@ LLM
 Text Response
 ```
 
-With MCP:
+### AI + MCP
 
 ```text
 User
@@ -420,6 +425,6 @@ Interested in building practical AI systems using:
 
 ## ⭐ Portfolio Project
 
-This project is part of my hands-on **Generative AI and Agentic AI portfolio**, demonstrating how AI models can interact with external tools and systems through the **Model Context Protocol**.
+This project is part of my hands-on **Generative AI and Agentic AI portfolio**, demonstrating how AI applications can interact with external tools and systems through the **Model Context Protocol**.
 
 If you find this project useful, consider giving the repository a ⭐.
