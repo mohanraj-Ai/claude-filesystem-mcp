@@ -2,436 +2,424 @@
 
 ### Claude Desktop + Model Context Protocol + Local Filesystem
 
-A simple **Model Context Protocol (MCP)** project that connects **Claude Desktop** to a local filesystem, allowing Claude to interact with files and folders through MCP tools.
+![Local Filesystem MCP Banner](banner.png)
 
-This project demonstrates how an AI assistant can securely interact with local files through a dedicated MCP server instead of directly accessing the operating system.
+A practical **Model Context Protocol (MCP)** project that connects **Claude Desktop** to a local filesystem through an MCP server.
 
----
-
-## 🧠 What is MCP?
-
-**Model Context Protocol (MCP)** is a standard that allows AI applications to connect with external tools, data sources, and services.
-
-In this project, Claude Desktop acts as the AI client and communicates with a local Filesystem MCP server.
-
-```text
-┌─────────────────────┐
-│    Claude Desktop   │
-│      AI Client      │
-└──────────┬──────────┘
-           │
-           │ MCP
-           ▼
-┌─────────────────────┐
-│ Filesystem MCP      │
-│      Server         │
-└──────────┬──────────┘
-           │
-           │ File Operations
-           ▼
-┌─────────────────────┐
-│    Local Folder     │
-│                     │
-│ 📄 Documents        │
-│ 📁 Projects         │
-│ 📄 Reports          │
-│ 📁 Data             │
-└─────────────────────┘
-```
+This project demonstrates how an AI assistant can interact with local files and folders through **MCP tools**, enabling controlled filesystem operations through a standardized AI-to-tool communication layer.
 
 ---
 
 ## 🚀 Project Overview
 
-The goal of this project is to demonstrate a **local MCP integration** using Claude Desktop.
+The **Local Filesystem MCP** project demonstrates how an AI assistant can interact with a local computer filesystem using the **Model Context Protocol**.
 
-Claude can communicate with the Filesystem MCP server and perform supported filesystem operations on an explicitly configured directory.
+Instead of allowing an AI application unrestricted access to the operating system, the MCP server exposes controlled tools that Claude can invoke when required.
 
-### Workflow
+### Key capabilities
+
+* 📂 List files and directories
+* 📄 Read files
+* 📝 Create files
+* 🔧 Perform filesystem operations through MCP tools
+* 🤖 Connect Claude Desktop with external tools
+* 🔐 Restrict access to authorized directories
+
+---
+
+## 🧠 What is Model Context Protocol?
+
+**Model Context Protocol (MCP)** is a standardized protocol that allows AI applications to connect with external tools, resources, and data sources.
+
+In this project, MCP acts as the communication layer between **Claude Desktop** and the **local filesystem**.
 
 ```text
-User
-  ↓
 Claude Desktop
-  ↓
-MCP Protocol
-  ↓
+      │
+      │ MCP Protocol
+      ▼
 Filesystem MCP Server
-  ↓
-Configured Local Directory
+      │
+      │ File Operations
+      ▼
+Authorized Local Filesystem
 ```
 
 ---
 
-## ✨ Features
+## 🏗️ Architecture
 
-* 🔌 Claude Desktop integration
-* 📁 Local filesystem access through MCP
-* 📄 File reading and management
-* 📂 Directory navigation
-* 🔍 File and folder operations
-* 🔐 Access limited to configured directories
-* 🧩 Demonstrates MCP client-server architecture
-* 💻 Runs locally on Windows
-* 🚫 No cloud database required
-* 🚫 No external backend required
+![Local Filesystem MCP Architecture](architecture.png)
+
+### Architecture Components
+
+**Claude Desktop**
+
+The AI assistant that understands the user's request and determines when a filesystem tool is required.
+
+**MCP Protocol**
+
+The communication layer used to send tool requests between Claude Desktop and the MCP server.
+
+**Filesystem MCP Server**
+
+The server exposes filesystem capabilities as MCP tools and executes authorized operations.
+
+**Local Filesystem**
+
+The files and directories that the MCP server is permitted to access.
+
+---
+
+## 🔄 Workflow
+
+![Local Filesystem MCP Workflow](workflow.png)
+
+The system follows this workflow:
+
+```text
+User Request
+     ↓
+Claude Desktop
+     ↓
+Select MCP Tool
+     ↓
+Filesystem MCP Server
+     ↓
+Authorized File Operation
+     ↓
+Tool Result
+     ↓
+Claude Desktop
+     ↓
+User
+```
+
+### Example
+
+A user can ask Claude:
+
+```text
+Create a file called project-notes.txt
+and write my project notes into it.
+```
+
+Claude identifies that a filesystem operation is required, invokes the appropriate MCP tool, and the MCP server performs the authorized operation.
 
 ---
 
 ## 🛠️ Technologies Used
 
-| Technology             | Purpose                       |
-| ---------------------- | ----------------------------- |
-| Claude Desktop         | MCP Client / AI Assistant     |
-| Model Context Protocol | Communication layer           |
-| Filesystem MCP Server  | Filesystem tools              |
-| Node.js / npx          | Running the MCP server        |
-| Windows                | Local development environment |
-| JSON                   | MCP configuration             |
+* **Claude Desktop** — AI assistant and MCP client
+* **Model Context Protocol (MCP)** — AI-to-tool communication
+* **Filesystem MCP Server** — filesystem tool provider
+* **Python** — server/runtime environment
+* **JSON** — configuration
+* **Git & GitHub** — version control and project portfolio
 
 ---
 
-## 📋 Prerequisites
+## 🔧 MCP Tool Concept
 
-Before running this project, install:
+The MCP server exposes filesystem functionality through tools.
 
+Typical operations include:
+
+```text
+List Directory
+Read File
+Create File
+Write File
+Move File
+Search Files
+```
+
+Claude can select an appropriate tool based on the user's request.
+
+The exact available tools depend on the filesystem MCP implementation and configuration.
+
+---
+
+## ⚙️ Setup
+
+### 1. Prerequisites
+
+Install the required software:
+
+* Python
+* Node.js / npm
 * Claude Desktop
-* Node.js
-* npm / npx
+* Git
 
-Verify Node.js:
+Verify the installations:
 
 ```bash
+python --version
 node --version
+npm --version
+git --version
 ```
 
-Verify npm:
+---
+
+### 2. Clone the Repository
 
 ```bash
-npm --version
+git clone https://github.com/mohanraj-Ai/claude-filesystem-mcp.git
+```
+
+Navigate into the project:
+
+```bash
+cd claude-filesystem-mcp
 ```
 
 ---
 
-# ⚙️ Setup
+### 3. Configure Claude Desktop
 
-## 1. Create a Local Folder
+Configure the MCP server in the Claude Desktop MCP configuration.
 
-Create a folder that Claude will be allowed to access.
+The configuration should specify:
 
-Example:
+* MCP server
+* Required runtime
+* Server command
+* Authorized filesystem directory
 
-```text
-E:\MCP\filesystem-project
-```
-
-You can place test files inside it:
-
-```text
-filesystem-project/
-├── documents/
-│   ├── notes.txt
-│   └── report.txt
-│
-├── data/
-│   └── sample.csv
-│
-└── README.txt
-```
+Only expose directories that are intentionally required by the project.
 
 ---
 
-## 2. Configure Claude Desktop
+### 4. Start Claude Desktop
 
-Claude Desktop uses:
+After updating the MCP configuration:
 
-```text
-claude_desktop_config.json
-```
-
-On Windows, the configuration file is normally located at:
-
-```text
-%APPDATA%\Claude\claude_desktop_config.json
-```
-
-Add the Filesystem MCP server:
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "E:\\MCP\\filesystem-project"
-      ]
-    }
-  }
-}
-```
-
-### ⚠️ Important
-
-Change:
-
-```text
-E:\\MCP\\filesystem-project
-```
-
-to your actual local folder.
+1. Save the configuration.
+2. Restart Claude Desktop.
+3. Verify that the filesystem MCP server is connected.
+4. Confirm that the available MCP tools are visible.
+5. Test a simple filesystem operation.
 
 ---
 
-## 3. Restart Claude Desktop
+## 🧪 Example Use Cases
 
-After saving the configuration:
+### 📂 List Files
 
-1. Completely close Claude Desktop.
-2. Start Claude Desktop again.
-3. Open the MCP/tool section.
-4. Verify that the Filesystem MCP server is connected.
+Example request:
+
+```text
+List the files in my project folder.
+```
+
+Claude can invoke the filesystem MCP tool to retrieve the directory contents.
 
 ---
 
-# 🧪 Testing the MCP Server
+### 📄 Read a File
 
-Once connected, you can ask Claude questions such as:
-
-```text
-List the files in my filesystem project.
-```
+Example request:
 
 ```text
-Read the contents of notes.txt.
+Read the README.md file.
 ```
 
-```text
-Show me the files inside the documents folder.
-```
-
-```text
-Create a new text file called test.txt.
-```
-
-```text
-Read all text files in the project folder.
-```
-
-Claude will use the appropriate MCP filesystem tools to interact with the configured directory.
+Claude can call the appropriate filesystem tool and return the file contents.
 
 ---
 
-# 🔐 Security
+### 📝 Create a File
 
-The Filesystem MCP server should only be given access to directories that you intentionally configure.
+Example request:
+
+```text
+Create a file named notes.txt and write
+today's project notes into it.
+```
+
+Claude can invoke the filesystem tool to create the file.
+
+---
+
+## 📸 Real Project Screenshots
+
+The following screenshots demonstrate the **actual working implementation**.
+
+### 1. MCP Server Running
+
+The MCP server is running and ready to handle filesystem tool requests.
+
+![MCP Server Running](screenshots/01-mcp-server-running.png)
+
+---
+
+### 2. Claude File Operation
+
+Claude Desktop communicates with the MCP server and performs a filesystem operation.
+
+![Claude File Operation](screenshots/02-claude-file-operation.png)
+
+---
+
+### 3. File Created
+
+The requested file is successfully created through the MCP filesystem integration.
+
+![File Created](screenshots/03-file-created.png)
+
+---
+
+## 🔐 Security Considerations
+
+Filesystem MCP integrations should use controlled directory access.
+
+### Recommended practices
+
+* ✅ Expose only required directories
+* ✅ Avoid exposing the entire system drive
+* ✅ Avoid exposing credentials
+* ✅ Avoid exposing `.env` files
+* ✅ Avoid exposing SSH keys
+* ✅ Review MCP tool permissions
+* ✅ Use a dedicated project directory when possible
 
 For example:
 
 ```text
-E:\MCP\filesystem-project
+❌ C:\
+❌ C:\Users\<username>\
+
+✅ E:\AI-Projects\MCP\
 ```
 
-Claude should not automatically receive unrestricted access to your entire computer.
-
-### Recommended practice
-
-Create a dedicated directory for MCP testing:
-
-```text
-E:\MCP\filesystem-project
-```
-
-Avoid giving access to sensitive directories containing:
-
-* Passwords
-* Personal documents
-* Banking information
-* Credentials
-* Private keys
-* System files
+The objective is to provide the AI assistant with **controlled tool access**, rather than unrestricted operating-system access.
 
 ---
 
-# 🏗️ Architecture
+## 🎯 Skills Demonstrated
 
-```text
-                    ┌──────────────────┐
-                    │      User        │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Claude Desktop   │
-                    │    MCP Client    │
-                    └────────┬─────────┘
-                             │
-                             │ MCP
-                             ▼
-                    ┌──────────────────┐
-                    │ Filesystem MCP   │
-                    │     Server       │
-                    └────────┬─────────┘
-                             │
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │  Local Filesystem│
-                    │                  │
-                    │ 📁 Documents     │
-                    │ 📁 Data          │
-                    │ 📄 Reports       │
-                    └──────────────────┘
-```
+This project demonstrates practical experience with:
+
+* Model Context Protocol
+* AI tool calling
+* AI agent architecture
+* Claude Desktop integration
+* MCP server integration
+* Filesystem automation
+* Tool-based AI workflows
+* JSON configuration
+* Python
+* Git & GitHub
+* AI system security concepts
 
 ---
 
-# 📂 Suggested Project Structure
+## 💡 Why MCP Matters
+
+Traditional LLM applications primarily generate responses from the information available inside the conversation.
+
+MCP allows AI applications to interact with external systems through tools.
 
 ```text
-local-filesystem-mcp/
+Traditional LLM
+
+User
+ ↓
+LLM
+ ↓
+Text Response
+```
+
+With MCP:
+
+```text
+User
+ ↓
+AI Assistant
+ ↓
+Tool Selection
+ ↓
+MCP
+ ↓
+External System
+ ↓
+Tool Result
+ ↓
+AI Response
+```
+
+This enables AI systems to move beyond text generation toward **tool-using and agentic workflows**.
+
+---
+
+## 🔮 Future Improvements
+
+Potential extensions for this project include:
+
+* [ ] GitHub MCP integration
+* [ ] Database MCP integration
+* [ ] Web-search MCP
+* [ ] REST API MCP tools
+* [ ] Authentication and authorization
+* [ ] Logging and monitoring
+* [ ] Multiple MCP server integration
+* [ ] Agent orchestration
+* [ ] MCP Desktop Extensions / MCPB
+
+---
+
+## 📂 Project Structure
+
+```text
+claude-filesystem-mcp/
 │
 ├── README.md
+├── LICENSE
+│
+├── banner.png
+├── architecture.png
+├── workflow.png
 │
 ├── screenshots/
-│   ├── claude-filesystem-mcp.png
-│   ├── mcp-tools.png
-│   └── filesystem-folder.png
+│   ├── 01-mcp-server-running.png
+│   ├── 02-claude-file-operation.png
+│   └── 03-file-created.png
 │
-├── demo/
-│   ├── sample.txt
-│   ├── sample.csv
-│   └── test-folder/
+├── src/
+│   └── ...
 │
-└── config/
-    └── claude_desktop_config.example.json
-```
-
-### ⚠️ Don't upload your personal Claude configuration
-
-For GitHub, create:
-
-```text
-config/claude_desktop_config.example.json
-```
-
-instead of uploading your real configuration file.
-
----
-
-# 📸 Screenshots
-
-Add screenshots demonstrating the working project.
-
-### Claude Desktop + Filesystem MCP
-
-```text
-screenshots/claude-filesystem-mcp.png
-```
-
-### MCP Tools
-
-```text
-screenshots/mcp-tools.png
-```
-
-### Local Filesystem
-
-```text
-screenshots/filesystem-folder.png
-```
-
-Example Markdown:
-
-```markdown
-![Claude Desktop Filesystem MCP](screenshots/claude-filesystem-mcp.png)
+├── config/
+│   └── ...
+│
+└── examples/
+    └── ...
 ```
 
 ---
 
-# 🎯 Learning Objectives
+## 👨‍💻 Author
 
-This project demonstrates:
+### Mohanraj P
 
-* Understanding of MCP architecture
-* MCP client-server communication
-* Local MCP server integration
-* Claude Desktop configuration
-* Filesystem tool integration
-* Local AI tool execution
-* Access-controlled filesystem interaction
-* Practical AI agent tooling
+**AI/ML Engineer | Generative AI Engineer | LLM, RAG & AI Agents**
 
----
+Interested in building practical AI systems using:
 
-# 🔄 MCP Connection Method
-
-This project represents:
-
-### Method 1 — Local MCP
-
-```text
-Claude Desktop
-      │
-      │ MCP
-      ▼
-Local MCP Server
-      │
-      ▼
-Local Filesystem
-```
-
-The entire MCP server runs locally on the development machine.
+* Generative AI
+* Large Language Models
+* AI Agents
+* Model Context Protocol
+* RAG Systems
+* LangChain
+* LangGraph
+* Machine Learning
+* Automotive AI
 
 ---
 
-# 💡 Example Use Cases
+## ⭐ Portfolio Project
 
-This architecture can be extended to build:
+This project is part of my hands-on **Generative AI and Agentic AI portfolio**, demonstrating how AI models can interact with external tools and systems through the **Model Context Protocol**.
 
-* 📄 AI document assistants
-* 📊 Local data analysis agents
-* 📝 Automated report generators
-* 🔍 Local file search assistants
-* 📁 Project management assistants
-* 🧠 AI coding assistants
-* 📚 Knowledge-base assistants
-
----
-
-# 🚧 Future Improvements
-
-Possible extensions include:
-
-* Add custom filesystem tools
-* Add file search functionality
-* Add document summarization
-* Add CSV analysis
-* Add PDF processing
-* Add multiple MCP servers
-* Add logging and monitoring
-* Add automated testing
-* Create a custom MCP server using Python
-
----
-
-# 👨‍💻 Project Purpose
-
-This project was created as a practical demonstration of **Model Context Protocol (MCP) integration with Claude Desktop**.
-
-It focuses on understanding how AI assistants can interact with local resources through standardized MCP tools.
-
----
-
-## ⭐ Portfolio
-
-This project can be used as a portfolio demonstration for:
-
-**AI Engineer | Generative AI Engineer | AI Agent Developer | MCP Developer**
-
----
-
-## 📜 License
-
-This project is intended for educational and portfolio purposes.
+If you find this project useful, consider giving the repository a ⭐.
