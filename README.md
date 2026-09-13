@@ -111,15 +111,12 @@ Claude identifies that a filesystem operation is required, invokes the appropria
 
 ## 🛠️ Technologies Used
 
-| Technology             | Purpose                           |
-| ---------------------- | --------------------------------- |
-| Claude Desktop         | AI assistant and MCP client       |
-| Model Context Protocol | AI-to-tool communication          |
-| Filesystem MCP Server  | Filesystem tool provider          |
-| Python                 | Server/runtime environment        |
-| JSON                   | MCP configuration                 |
-| Git                    | Version control                   |
-| GitHub                 | Source-code hosting and portfolio |
+* **Claude Desktop** — AI assistant and MCP client
+* **Model Context Protocol (MCP)** — AI-to-tool communication
+* **Filesystem MCP Server** — filesystem tool provider
+* **Python** — server/runtime environment
+* **JSON** — configuration
+* **Git & GitHub** — version control and source-code hosting
 
 ---
 
@@ -127,7 +124,7 @@ Claude identifies that a filesystem operation is required, invokes the appropria
 
 The MCP server exposes filesystem functionality through tools.
 
-Typical filesystem operations may include:
+Typical operations may include:
 
 ```text
 List Directory
@@ -164,8 +161,6 @@ npm --version
 git --version
 ```
 
----
-
 ### 2. Clone the Repository
 
 ```bash
@@ -177,8 +172,6 @@ Navigate into the project:
 ```bash
 cd claude-filesystem-mcp
 ```
-
----
 
 ### 3. Configure the MCP Server
 
@@ -192,8 +185,6 @@ The configuration should specify:
 * Authorized filesystem directory
 
 Only expose directories that are intentionally required by the project.
-
----
 
 ### 4. Start Claude Desktop
 
@@ -219,8 +210,6 @@ List the files in my project folder.
 
 Claude can invoke the filesystem MCP tool to retrieve the directory contents.
 
----
-
 ### 📄 Read a File
 
 Example request:
@@ -230,8 +219,6 @@ Read the README.md file.
 ```
 
 Claude can call the appropriate filesystem tool and return the requested file contents.
-
----
 
 ### 📝 Create a File
 
@@ -254,23 +241,19 @@ The following screenshots demonstrate the actual working implementation.
 
 The MCP server is running and ready to handle filesystem tool requests.
 
-![MCP Server Running](screenshots/01-mcp-server-running.png)
-
----
+![MCP Server Running](screenshots/01-mcp-server-running.PNG)
 
 ### 2. Claude File Operation
 
 Claude Desktop communicates with the MCP server and performs a filesystem operation.
 
-![Claude File Operation](screenshots/02-claude-file-operation.png)
-
----
+![Claude File Operation](screenshots/02-claude-file-operation.PNG)
 
 ### 3. File Created
 
 The requested file is successfully created through the MCP filesystem integration.
 
-![File Created](screenshots/03-file-created.png)
+![File Created](screenshots/03-file-created.PNG)
 
 ---
 
@@ -381,24 +364,23 @@ claude-filesystem-mcp/
 │
 ├── README.md
 ├── LICENSE
+├── .gitignore
 │
 ├── banner.png
 ├── architecture.png
 ├── workflow.png
-│
-├── screenshots/
-│   ├── 01-mcp-server-running.png
-│   ├── 02-claude-file-operation.png
-│   └── 03-file-created.png
-│
-├── src/
-│   └── ...
+├── Gemini_Generated_Image_wu27djwu27djwu27.png
 │
 ├── config/
-│   └── ...
+│   └── claude_desktop_config.example.json
 │
-└── examples/
-    └── ...
+├── examples/
+│   └── leave_letter.txt
+│
+└── screenshots/
+    ├── 01-mcp-server-running.PNG
+    ├── 02-claude-file-operation.PNG
+    └── 03-file-created.PNG
 ```
 
 ---
